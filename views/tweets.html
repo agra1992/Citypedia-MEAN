@@ -1,0 +1,18 @@
+<div ng-controller="resultsTweetsCtrl">
+	<a ui-sref="results">Back</a>
+
+	<table class="table">
+		<thead>
+			<tr>
+			  <th>Created At</th>          
+			  <th>Tweet</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="tweet in tweets">
+				<td>{{ tweet.created_at }}</td>
+				<td>{{ tweet.text }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

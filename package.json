@@ -1,0 +1,26 @@
+{
+  "name": "angular-ui-router",
+  "version": "0.0.0",
+  "private": false,
+  "author": "Agradeep K",
+  "devDependencies": {
+    "body-parser": "^1.15.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "5.1.0",
+    "npm": "3.4.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "~4.9.7",
+    "fb": "^1.1.1",
+    "twitter": "^1.4.0"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ]
+}

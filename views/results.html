@@ -1,0 +1,14 @@
+<div ng-controller="resultsCtrl">
+  <ul>
+      <li><a ui-sref="tweets">Tweets</a></li>
+      <li><a ui-sref="fb" ng-click="getFBData()">FB Statuses</a></li>
+      <li><a ui-sref="insta">Instagram</a></li>
+  </ul>
+
+  <div class="container">
+
+      <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+      <div ui-view></div>
+
+  </div>
+</div>

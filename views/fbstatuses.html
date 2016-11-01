@@ -1,0 +1,18 @@
+<div ng-controller="resultsFbCtrl">
+	<a ui-sref="results">Back</a>
+
+	<table class="table">
+		<thead>
+			<tr>
+			  <th>Created At</th>          
+			  <th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="fb in fbStatuses">
+				<td>{{ fb.created_at }}</td>
+				<td>{{ fb.text }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

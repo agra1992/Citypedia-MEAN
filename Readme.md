@@ -1,0 +1,46 @@
+<!-- partial-about.html -->
+
+<div class="jumbotron text-center">
+    <h1>About Citypedia</h1>
+
+<p>We plan on building a city explorer app using Javascript technologies like the MEAN stack.</p>
+
+<p>This app will be built on top of a mashup of data retrieved from various APIs like Twitter,
+Facebook, Instagram and more for any city that the user wants to search.
+
+<p>The user will be able to see what pictures the residents of a certain city are uploading or
+what kind of weather the city will have on the dates they are planning on traveling there or
+find areas of interest in the city and more.
+
+<p>The app will have the following features and will use data from the following APIs:
+
+<p>1) For weather info of the city:
+    -> Open Weather Map API
+
+<p>2) For areas of interest in the city:
+    -> Google Maps API
+
+<p>3) For personality and sentiment analysis of people in the city
+    -> Twitter API
+    -> Facebook API
+
+<p>4) Pictures of the city
+    -> Instagram API
+
+<p>5) Hotels in the city:
+    -> Expedia API
+
+<p>6) General news about the city:
+    -> New York Times API
+
+<p>As we can see, this app would serve as a one stop shop for getting all information about any city
+the user searches for.
+
+<p>We are planning on doing this by mashing up data from these six different APIs and provide real-time data
+to the users in a user friendly manner.
+
+<p>Technologies we plan to use:</p>
+<p>Front-End Framework: AngularJS</p>
+<p>Back-End: NodeJS and ExpressJS</p>
+<p>API Architecture: ReSTful</p>
+</div>
