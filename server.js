@@ -3,8 +3,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var twitter = require('twitter');
 var FB = require('fb');
+var AlchemyAPI = require('alchemy-api');
 
 var twitter_config = require('./twitter.config');
+var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
 
 // Create a new twitter instance
 var twitterClient = new twitter(twitter_config.twitter);
@@ -35,12 +37,20 @@ app.post('/city-info', function (req, res) {
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
 
-		twitterClient.get('search/tweets', {q: city, count: 50, lang: "en"}, function(error, tweets, response) {
+		twitterClient.get('search/tweets', {q: city, count: 5, lang: "en"}, function(error, tweets, response) {
 			if(error) {
 				res.status(500).send();
 			} else {
 				console.log("In Tweets");
-				res.json(tweets);
+
+				alchemy.sentiment(JSON.stringify(tweets), {}, function(err, response) {
+					if (err) throw err;
+
+					// See http://www.alchemyapi.com/api/ for format of returned object
+					var sentiment = response.docSentiment;
+
+					res.json({tweets: tweets, sentiment: sentiment});
+				});
 			}
 		});
 	}

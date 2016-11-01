@@ -1,18 +1,38 @@
 <div ng-controller="resultsTweetsCtrl">
 	<a ui-sref="results">Back</a>
 
-	<table class="table">
-		<thead>
-			<tr>
-			  <th>Created At</th>          
-			  <th>Tweet</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="tweet in tweets">
-				<td>{{ tweet.created_at }}</td>
-				<td>{{ tweet.text }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-md-10">
+			<table class="table">
+				<thead>
+					<tr>
+					  <th>Created At</th>          
+					  <th>Tweet</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="tweet in tweets">
+						<td>{{ tweet.created_at }}</td>
+						<td>{{ tweet.text }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-2">
+			<table class="table">
+				<thead>
+					<tr>
+					  <th>Sentiment Score</th>          
+					  <th>Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ sentiment.score }}</td>
+						<td>{{ sentiment.type }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

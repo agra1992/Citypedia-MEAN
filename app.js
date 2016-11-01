@@ -97,9 +97,10 @@ routerApp.controller('resultsCtrl', ['$scope', '$http', 'myService', '$window', 
 
 routerApp.controller('resultsTweetsCtrl', ['$scope', '$http', 'myService', function($scope, $http, myService) {
     console.log("Hello World from results tweets controller");
-    tweetList = myService.get();
+    tweetList = myService.get().tweets;
+    tweetSentis = myService.get().sentiment;
     $scope.tweets = tweetList.statuses;
-
+    $scope.sentiment = tweetSentis;
 }]);﻿
 
 routerApp.factory('myService', function() {
