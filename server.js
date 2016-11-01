@@ -35,7 +35,7 @@ app.post('/city-info', function (req, res) {
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
 
-		twitterClient.get('search/tweets', {q: city, count: 5, lang: "en"}, function(error, tweets, response) {
+		twitterClient.get('search/tweets', {q: city, count: 50, lang: "en"}, function(error, tweets, response) {
 			if(error) {
 				res.status(500).send();
 			} else {
