@@ -1,15 +1,30 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var request = require('request');
+var _ = require('underscore');
+
+//Twitter definition and config
 var twitter = require('twitter');
-var FB = require('fb');
-var AlchemyAPI = require('alchemy-api');
-
-var twitter_config = require('./twitter.config');
-var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
-
-// Create a new twitter instance
+var twitter_config = require('./config/twitter.config');
 var twitterClient = new twitter(twitter_config.twitter);
+
+//Tumblr config
+var tumblr = require('tumblr.js');
+
+var tumblr_config = require('./config/tumblr.config');
+var tumblr_oauth = {
+	consumer_key: tumblr_config.tumblr.consumer_key,
+	consumer_secret: tumblr_config.tumblr.consumer_secret,
+	token: tumblr_config.tumblr.token,
+	token_secret: tumblr_config.tumblr.token_secret
+};
+
+console.log(tumblr_oauth);
+
+//Alchemy definition and config
+var AlchemyAPI = require('alchemy-api');
+var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
 
 // parse various different custom JSON types as JSON
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -37,7 +52,7 @@ app.post('/city-info', function (req, res) {
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
 
-		twitterClient.get('search/tweets', {q: city, count: 50, lang: "en"}, function(error, tweets, response) {
+		twitterClient.get('search/tweets', {q: city, count: 5, lang: "en"}, function(error, tweets, response) {
 			if(error) {
 				res.status(500).send();
 			} else {
@@ -56,21 +71,19 @@ app.post('/city-info', function (req, res) {
 	}
 });
 
-app.post('/city-info-fb', function (req, res) {
+app.post('/city-info-tumblr', function (req, res) {
 	console.log(req.body.cityname);
+	console.log('In tumblr');
 
-	if(req.body) {
-		var city = encodeURIComponent(req.body.cityname);
-
-		twitterClient.get('search/tweets', {q: city, count: 5, lang: "en"}, function(error, tweets, response) {
-			if(error) {
-				res.status(500).send();
-			} else {
-				console.log("In Tweets");
-				res.json(tweets);
-			}
-		});
-	}
+	var client = tumblr.createClient(tumblr_oauth);
+	client.taggedPosts('london', {limit:2}, function (err, data) {
+		if(err) {
+			console.log(err);
+			res.status(500).send();
+		} else {
+			res.json(data);
+		}
+	});
 });
 
 app.listen(port, function() {

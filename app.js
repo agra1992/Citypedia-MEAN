@@ -1,6 +1,12 @@
 // app.js
 var routerApp = angular.module('routerApp', ['ui.router']);
 
+routerApp.filter('trustAsResourceUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}])
+
 routerApp.config(function($stateProvider, $urlRouterProvider) {
     
     $urlRouterProvider.otherwise('/home');
@@ -30,9 +36,9 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/tweets.html'
         })
 
-        .state('fbstatuses', {
-            url: '/results/fbstatuses',
-            templateUrl: 'views/fbstatuses.html'
+        .state('tumblr', {
+            url: '/results/tumblr',
+            templateUrl: 'views/tumblr.html'
         })
 
         .state('instas', {
@@ -75,32 +81,40 @@ routerApp.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', fun
 
 routerApp.controller('resultsCtrl', ['$scope', '$http', 'myService', '$window', function($scope, $http, myService, $window) {
     console.log("Hello World from home controller");
-    
-
-    $scope.getFBData = function() {
-        if(myService.getCity()) {
-            var data = {
-                "Content-Type": "application/json",
-                "cityname": $scope.cityname
-            }
-            $http.post('/city-info-fb', data).success(function(res) {
-                myService.set(res);
-                var landingUrl = "http://" + $window.location.host + "/#/results";
-                $window.location.href = landingUrl;
-            });
-        } else {
-            alert("Error");
-        }
-        
-    };
 }]);﻿
 
 routerApp.controller('resultsTweetsCtrl', ['$scope', '$http', 'myService', function($scope, $http, myService) {
     console.log("Hello World from results tweets controller");
+    $scope.positiveSentiMsg = false;
+    $scope.negativeSentiMsg = false;
+    
     tweetList = myService.get().tweets;
     tweetSentis = myService.get().sentiment;
+    
     $scope.tweets = tweetList.statuses;
     $scope.sentiment = tweetSentis;
+    
+    if(tweetSentis.type === "positive")
+        $scope.positiveSentiMsg = true;
+    else
+        $scope.negativeSentiMsg = true;
+}]);﻿
+
+routerApp.controller('resultsTubmlrCtrl', ['$scope', '$http', '$window', 'myService', function($scope, $http, $window, myService) {
+    var cityName = myService.getCity();
+    console.log(cityName);
+    var data = {
+        "Content-Type": "application/json",
+        "cityname": cityName
+    }
+    $http.post('/city-info-tumblr', data).success(function(res) {
+        var landingUrl = "http://" + $window.location.host + "/#/results/tumblr";
+        $window.location.href = landingUrl;
+
+        $scope.tumblrs = res;
+        console.log($scope.tumblrs)
+    });
+    
 }]);﻿
 
 routerApp.factory('myService', function() {
@@ -132,3 +146,4 @@ routerApp.factory('myService', function() {
     }
 
 });
+

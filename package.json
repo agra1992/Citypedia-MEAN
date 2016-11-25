@@ -19,7 +19,11 @@
     "body-parser": "^1.15.2",
     "express": "~4.9.7",
     "fb": "^1.1.1",
-    "twitter": "^1.4.0"
+    "oauth": "0.9.10",
+    "request": "2.30.0",
+    "tumblr.js": "^1.1.1",
+    "twitter": "^1.4.0",
+    "underscore": "^1.8.3"
   },
   "cacheDirectories": [
     "node_modules"

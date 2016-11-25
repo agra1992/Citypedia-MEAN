@@ -31,6 +31,14 @@
 						<td>{{ sentiment.score }}</td>
 						<td>{{ sentiment.type }}</td>
 					</tr>
+					<tr>
+						<div ng-show="positiveSentiMsg" class="alert alert-success">
+							<strong>There is a good feeling amongst people about this city.</strong>
+						</div>
+						<div ng-show="negativeSentiMsg" class="alert alert-danger">
+							<strong>There is a bad feeling amongst people about this city.</strong>
+						</div>
+					</tr>
 				</tbody>
 			</table>
 		</div>
