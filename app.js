@@ -48,7 +48,6 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 routerApp.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', function($scope, $http, myService, $window) {
-    console.log("Hello World from home controller");
     
     var refresh = function() {
         $scope.errorMsg = false;
@@ -79,12 +78,7 @@ routerApp.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', fun
     };
 }]);﻿
 
-routerApp.controller('resultsCtrl', ['$scope', '$http', 'myService', '$window', function($scope, $http, myService, $window) {
-    console.log("Hello World from home controller");
-}]);﻿
-
 routerApp.controller('resultsTweetsCtrl', ['$scope', '$http', 'myService', function($scope, $http, myService) {
-    console.log("Hello World from results tweets controller");
     $scope.positiveSentiMsg = false;
     $scope.negativeSentiMsg = false;
     
@@ -102,7 +96,6 @@ routerApp.controller('resultsTweetsCtrl', ['$scope', '$http', 'myService', funct
 
 routerApp.controller('resultsTubmlrCtrl', ['$scope', '$http', '$window', 'myService', function($scope, $http, $window, myService) {
     var cityName = myService.getCity();
-    console.log(cityName);
     var data = {
         "Content-Type": "application/json",
         "cityname": cityName
@@ -112,7 +105,6 @@ routerApp.controller('resultsTubmlrCtrl', ['$scope', '$http', '$window', 'myServ
         $window.location.href = landingUrl;
 
         $scope.tumblrs = res;
-        console.log($scope.tumblrs)
     });
     
 }]);﻿
@@ -122,7 +114,6 @@ routerApp.factory('myService', function() {
     var savedCity = ""
 
     function set(data) {
-        console.log(data);
         savedData = data;
     }
 

@@ -2,7 +2,7 @@
 	<a ui-sref="results">Back</a>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-lg-8 col-lg-offset-2">
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="tumblr in tumblrs track by $index">
 					<iframe src="{{tumblr.post_url | trustAsResourceUrl }}"></iframe>

@@ -20,8 +20,6 @@ var tumblr_oauth = {
 	token_secret: tumblr_config.tumblr.token_secret
 };
 
-console.log(tumblr_oauth);
-
 //Alchemy definition and config
 var AlchemyAPI = require('alchemy-api');
 var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
@@ -47,7 +45,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/city-info', function (req, res) {
-	console.log(req.body.cityname);
+	console.log('In tweets');
 
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
@@ -56,8 +54,6 @@ app.post('/city-info', function (req, res) {
 			if(error) {
 				res.status(500).send();
 			} else {
-				console.log("In Tweets");
-
 				alchemy.sentiment(JSON.stringify(tweets), {}, function(err, response) {
 					if (err) throw err;
 
@@ -72,7 +68,6 @@ app.post('/city-info', function (req, res) {
 });
 
 app.post('/city-info-tumblr', function (req, res) {
-	console.log(req.body.cityname);
 	console.log('In tumblr');
 
 	var client = tumblr.createClient(tumblr_oauth);
