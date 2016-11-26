@@ -3,13 +3,20 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var _ = require('underscore');
-
-//Twitter definition and config
+//=========================================================================
+//TWITTER
+//=========================================================================
 var twitter = require('twitter');
 var twitter_config = require('./config/twitter.config');
 var twitterClient = new twitter(twitter_config.twitter);
-
-//Tumblr config
+//=========================================================================
+//ALCHEMY
+//=========================================================================
+var AlchemyAPI = require('alchemy-api');
+var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
+//=========================================================================
+//TUMBLR
+//=========================================================================
 var tumblr = require('tumblr.js');
 
 var tumblr_config = require('./config/tumblr.config');
@@ -19,10 +26,28 @@ var tumblr_oauth = {
 	token: tumblr_config.tumblr.token,
 	token_secret: tumblr_config.tumblr.token_secret
 };
+//=========================================================================
+//INSTAGRAM
+//=========================================================================
+var ig = require('instagram-node').instagram();
+var insta_config = require('./config/insta.config');
 
-//Alchemy definition and config
-var AlchemyAPI = require('alchemy-api');
-var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
+ig.use({ client_id: insta_config.insta.client_id, client_secret: insta_config.insta.client_secret });
+
+//=========================================================================
+//YELP
+//=========================================================================
+var Yelp = require('yelp');
+var yelp_config = require('./config/yelp.config');
+var yelp_oauth = {
+	consumer_key: yelp_config.yelp.consumer_key,
+	consumer_secret: yelp_config.yelp.consumer_secret,
+	token: yelp_config.yelp.token,
+	token_secret: yelp_config.yelp.token_secret
+};
+var yelp = new Yelp(yelp_oauth);
+
+//=========================================================================
 
 // parse various different custom JSON types as JSON
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -78,6 +103,34 @@ app.post('/city-info-tumblr', function (req, res) {
 		} else {
 			res.json(data);
 		}
+	});
+});
+
+app.post('/city-info-instas', function (req, res) {
+	console.log('In insta');
+	console.log(req.body.cityname);
+
+	ig.media_popular(function(err, medias, remaining, limit) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log(medias);
+		}
+	});
+});
+
+app.post('/city-info-yelp', function (req, res) {
+	console.log('In yelp');
+	console.log(req.body.cityname);
+
+	yelp.search({ term: 'food', limit: 2, location: req.body.cityname })
+		.then(function (data) {
+		 	console.log(data);
+		 	res.json(data);
+		})
+		.catch(function (err) {
+		 	console.error(err);
+		 	res.status(500).send();
 	});
 });
 

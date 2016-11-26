@@ -1,0 +1,26 @@
+<div ng-controller="resultsYelpCtrl">
+	<a ui-sref="results">Back</a>
+
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<thead>
+					<tr>
+					  <th>Name</th>          
+					  <th>Rating</th>
+					  <th>Yelp Link</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="yelp in yelps">
+						<td>{{ yelp.name }}</td>
+						<td>{{ yelp.rating }}
+						<img ng-src="{{yelp.rating_img_url}}" />
+						</td>
+						<td><a href="{{ yelp.url }}" target="_blank">View on Yelp</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

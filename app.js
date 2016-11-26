@@ -45,6 +45,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/results/instas',
             templateUrl: 'views/instas.html'
         })
+
+        .state('yelp', {
+            url: '/results/yelp',
+            templateUrl: 'views/yelp.html'
+        })
 });
 
 routerApp.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', function($scope, $http, myService, $window) {
@@ -101,12 +106,37 @@ routerApp.controller('resultsTubmlrCtrl', ['$scope', '$http', '$window', 'myServ
         "cityname": cityName
     }
     $http.post('/city-info-tumblr', data).success(function(res) {
-        var landingUrl = "http://" + $window.location.host + "/#/results/tumblr";
-        $window.location.href = landingUrl;
-
         $scope.tumblrs = res;
     });
     
+}]);
+
+routerApp.controller('resultsInstasCtrl', ['$scope', '$http', 'myService', function($scope, $http, myService) {
+    console.log("hello from insta");
+
+    var cityName = myService.getCity();
+    var data = {
+        "Content-Type": "application/json",
+        "cityname": cityName
+    }
+    $http.post('/city-info-instas', data).success(function(res) {
+        console.log(res);
+    });
+}]);﻿
+
+routerApp.controller('resultsYelpCtrl', ['$scope', '$http', '$window', 'myService', function($scope, $http, $window, myService) {
+    console.log("hello from yelp");
+
+    var cityName = myService.getCity();
+    var data = {
+        "Content-Type": "application/json",
+        "cityname": cityName
+    }
+
+    $http.post('/city-info-yelp', data).success(function(res) {
+        $scope.yelps = res.businesses;
+        console.log($scope.yelps);
+    });
 }]);﻿
 
 routerApp.factory('myService', function() {
@@ -137,4 +167,3 @@ routerApp.factory('myService', function() {
     }
 
 });
-
