@@ -16,13 +16,13 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'partial-home.html'
+            templateUrl: 'views/home.html'
         })
         
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         .state('about', {
             url: '/about',
-            templateUrl: 'partial-about.html'
+            templateUrl: 'views/about.html'
         })
 
         // RESULTS PAGE AND MULTIPLE NAMED VIEWS =================================

@@ -96,11 +96,12 @@ app.post('/city-info-tumblr', function (req, res) {
 	console.log('In tumblr');
 
 	var client = tumblr.createClient(tumblr_oauth);
-	client.taggedPosts(req.body.cityname, {limit:2}, function (err, data) {
+	client.taggedPosts(req.body.cityname, {limit:5}, function (err, data) {
 		if(err) {
 			console.log(err);
 			res.status(500).send();
 		} else {
+			console.log(data);
 			res.json(data);
 		}
 	});
