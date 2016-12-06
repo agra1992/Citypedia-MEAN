@@ -101,7 +101,6 @@ app.post('/city-info-tumblr', function (req, res) {
 			console.log(err);
 			res.status(500).send();
 		} else {
-			console.log(data);
 			res.json(data);
 		}
 	});
@@ -124,7 +123,7 @@ app.post('/city-info-yelp', function (req, res) {
 	console.log('In yelp');
 	console.log(req.body.cityname);
 
-	yelp.search({ term: 'food', limit: 2, location: req.body.cityname })
+	yelp.search({ term: 'food', limit: 10, location: req.body.cityname })
 		.then(function (data) {
 		 	console.log(data);
 		 	res.json(data);

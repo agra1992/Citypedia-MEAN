@@ -13,7 +13,10 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="yelp in yelps">
-						<td>{{ yelp.name }}</td>
+						<td>
+							<img src={{yelp.image_url}} />
+							{{ yelp.name }}
+						</td>
 						<td>{{ yelp.rating }}
 						<img ng-src="{{yelp.rating_img_url}}" />
 						</td>
