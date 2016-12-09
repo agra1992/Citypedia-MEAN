@@ -12,15 +12,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="yelp in yelps">
+					<tr ng-repeat="yelp in yelps track by $index">
 						<td>
-							<img src={{yelp.image_url}} />
-							{{ yelp.name }}
+							<img src={{yelp.yelpImageUrl}} />
+							{{ yelp.yelpName }}
 						</td>
-						<td>{{ yelp.rating }}
-						<img ng-src="{{yelp.rating_img_url}}" />
+						<td>
+							<img ng-src="{{yelp.yelpRatingImgUrl}}" />
 						</td>
-						<td><a href="{{ yelp.url }}" target="_blank">View on Yelp</a></td>
+						<td><a href="{{ yelp.yelpUrl }}" target="_blank">View on Yelp</a></td>
 					</tr>
 				</tbody>
 			</table>

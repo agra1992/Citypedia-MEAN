@@ -5,7 +5,9 @@
 		<div class="col-lg-8 col-lg-offset-2">
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="tumblr in tumblrs track by $index">
-					<iframe src="{{tumblr.post_url | trustAsResourceUrl }}"></iframe>
+					<p>{{tumblr.blogName}}</p>
+					<iframe src="{{tumblr.postUrl | trustAsResourceUrl }}"></iframe>
+					<a href={{tumblr.postUrl}} target="_blank">View blog on external link</a>
 				</li>
 			</ul>
 		</div>

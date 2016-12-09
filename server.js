@@ -3,6 +3,15 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 var _ = require('underscore');
+var db = require('./db');
+
+//=========================================================================
+//OPENWEATHERMAP
+//=========================================================================
+var weather = require('npm-openweathermap');
+//set your API key if you have one 
+weather.api_key = '2fdd4a04dafaf20bc3fe0a646f8165c1';
+weather.temp = 'f';
 //=========================================================================
 //TWITTER
 //=========================================================================
@@ -13,7 +22,8 @@ var twitterClient = new twitter(twitter_config.twitter);
 //ALCHEMY
 //=========================================================================
 var AlchemyAPI = require('alchemy-api');
-var alchemy = new AlchemyAPI('05d95e59fa61fc33dad053a59f2e983478aaa2e0');
+var alchemy_config = require('./config/alchemy.config');
+var alchemy = new AlchemyAPI(alchemy_config.alchemy.api_key);
 //=========================================================================
 //TUMBLR
 //=========================================================================
@@ -57,7 +67,7 @@ app.use(bodyParser.urlencoded({
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 3000;
+var PORT = process.env.PORT || 4000;
 
 // make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/'));
@@ -69,39 +79,147 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.post('/city-info', function (req, res) {
-	console.log('In tweets');
+app.post('/city-info-twitter', function (req, res) {
+	console.log('In tweets post');
 
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
 
-		twitterClient.get('search/tweets', {q: city, count: 5, lang: "en"}, function(error, tweets, response) {
+		twitterClient.get('search/tweets', {q: city, count: 2, lang: "en"}, function(error, tweets, response) {
 			if(error) {
 				res.status(500).send();
 			} else {
-				alchemy.sentiment(JSON.stringify(tweets), {}, function(err, response) {
-					if (err) throw err;
-
+				alchemy.sentiment(JSON.stringify(tweets), {}, function(err, data) {
+					console.log('here1');
+					if (err) {
+						console.log('Error in alchemy sentiments');
+						res.status(500).send();
+					}
+					console.log('here2');
 					// See http://www.alchemyapi.com/api/ for format of returned object
-					var sentiment = response.docSentiment;
+					var sentiments = data.docSentiment;
+					alchemy.emotions(JSON.stringify(tweets), {}, function(err, response) {
+						if (err) {
+							console.log('Error in alchemy emotions');
+							res.status(500).send();
+						}
+						// See http://www.alchemyapi.com/api/html-api-1 for format of returned object
+						var emotions = response.docEmotions;
 
-					res.json({tweets: tweets, sentiment: sentiment});
+						var allData = {
+							'tweets': tweets,
+							'sentiments': sentiments,
+							'emotions': emotions
+						};
+						db.dbschema.create({userId: req.body.userId + '_tweets', allTwitterData: JSON.stringify(allData)}).then(function(data) {
+							//console.log(data);
+							res.json(data);
+						}, function(e) {
+							console.log(e);
+							res.status(400).json(e);
+						});
+					});
 				});
 			}
 		});
 	}
 });
 
-app.post('/city-info-tumblr', function (req, res) {
-	console.log('In tumblr');
+app.get('/city-info-twitter', function(req, res) {
+	console.log('In tweets get');
 
+	db.dbschema.findOne({
+		where: {
+			userId: req.query.userId + '_tweets'
+		}
+	}).then(function(data) {
+		console.log('here3', data);
+		if (!data) {
+			console.log('here4');
+			res.json({ data: null });
+		} else {
+			res.json({ "userId": data.userId, "allTwitterData": data.allTwitterData});
+		}
+	}, function(e) {
+		res.status(404).send();
+	});
+});
+
+
+app.get('/city-info-openweather', function(req, res) {
+	console.log('In tumblr get');
+
+	db.dbschema.findOne({
+		where: {
+			userId: req.query.userId + '_weather'
+		}
+	}).then(function(data) {
+		if (!data) {
+			res.send({ data: null });
+		} else {
+			res.json({ "userId": data.userId, "weatherData": data.weatherData});
+		}
+	}, function(e) {
+		res.status(404).send();
+	});
+});
+
+app.post('/city-info-openweather', function (req, res) {
+	console.log('In openweather post');
+
+	weather.get_weather_custom('city', req.body.cityname, 'forecast').then(function(data){
+	    db.dbschema.create({userId: req.body.userId + '_weather', weatherData: JSON.stringify(data)}).then(function(data) {
+	    	res.json(data);
+	    }, function(e) {
+	    	console.log(e);
+	    	res.status(400).json(e);
+	    });
+	}, function(err){
+	    console.log(err);
+	});
+});
+
+app.get('/city-info-tumblr', function(req, res) {
+	console.log('In tumblr get');
+
+	db.dbschema.findOne({
+		where: {
+			userId: req.query.userId + '_tumblr'
+		}
+	}).then(function(data) {
+		if (!data) {
+			res.send({ data: null });
+		} else {
+			res.json({ "userId": data.userId, "tumblrData": data.tumblrData});
+		}
+	}, function(e) {
+		res.status(404).send();
+	});
+});
+
+app.post('/city-info-tumblr', function (req, res) {
+	console.log('In tumblr post');
+	var arrTumblrData = [];
 	var client = tumblr.createClient(tumblr_oauth);
-	client.taggedPosts(req.body.cityname, {limit:5}, function (err, data) {
+
+	client.taggedPosts(req.body.cityname, {limit:2}, function (err, data) {
 		if(err) {
 			console.log(err);
 			res.status(500).send();
 		} else {
-			res.json(data);
+			data.forEach(function(item) {
+				var val = {
+					'blogName': item.blog_name,
+					'postUrl': item.post_url
+				}
+				arrTumblrData.push(val);
+			});
+			db.dbschema.create({userId: req.body.userId + '_tumblr', tumblrData: JSON.stringify(arrTumblrData)}).then(function(data) {
+				res.json(data);
+			}, function(e) {
+				console.log(e);
+				res.status(400).json(e);
+			});
 		}
 	});
 });
@@ -119,14 +237,47 @@ app.post('/city-info-instas', function (req, res) {
 	});
 });
 
-app.post('/city-info-yelp', function (req, res) {
-	console.log('In yelp');
-	console.log(req.body.cityname);
+app.get('/city-info-yelp', function(req, res) {
+	console.log('In yelp get');
 
-	yelp.search({ term: 'food', limit: 10, location: req.body.cityname })
+	db.dbschema.findOne({
+		where: {
+			userId: req.query.userId + '_yelp'
+		}
+	}).then(function(data) {
+		if (!data) {
+			res.send({ data: null });
+			//res.json(data.toJSON());
+		} else {
+			res.json({ "userId": data.userId, "yelpData": data.yelpData});
+		}
+	}, function(e) {
+		res.status(404).send();
+	});
+});
+
+app.post('/city-info-yelp', function (req, res) {
+	console.log('In yelp post');
+
+	yelp.search({ term: 'food', limit: 2, location: req.body.cityname })
 		.then(function (data) {
-		 	console.log(data);
-		 	res.json(data);
+		 	var arrYelpData = [];
+		 	data.businesses.forEach(function(item) {
+		 		var val = {
+		 			'yelpImageUrl': item.image_url,
+		 			'yelpName': item.name,
+		 			'yelpRatingImgUrl': item.rating_img_url,
+		 			'yelpUrl': item.url
+		 		};
+		 		arrYelpData.push(val);
+		 	});
+		 	//Insert data into DB
+		 	db.dbschema.create({userId: req.body.userId + '_yelp', yelpData: JSON.stringify(arrYelpData)}).then(function(data) {
+		 		res.json(data);
+		 	}, function(e) {
+		 		console.log(e);
+		 		res.status(400).json(e);
+		 	});
 		})
 		.catch(function (err) {
 		 	console.error(err);
@@ -134,6 +285,8 @@ app.post('/city-info-yelp', function (req, res) {
 	});
 });
 
-app.listen(port, function() {
-    console.log('App is running on http://localhost:' + port);
+db.sequelize.sync({force: true}).then(function() {
+	app.listen(PORT, function() {
+		console.log('Express listening on port ' + PORT + '!');
+	});
 });

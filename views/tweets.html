@@ -1,6 +1,5 @@
 <div ng-controller="resultsTweetsCtrl">
 	<a ui-sref="results">Back</a>
-
 	<div class="row">
 		<div class="col-md-8">
 			<table class="table">
@@ -19,28 +18,52 @@
 			</table>
 		</div>
 		<div class="col-md-4">
-			<table class="table">
-				<thead>
-					<tr>
-					  <th>Sentiment Score</th>          
-					  <th>Type</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>{{ sentiment.score }}</td>
-						<td>{{ sentiment.type }}</td>
-					</tr>
-					<tr>
-						<div ng-show="positiveSentiMsg" class="alert alert-success">
-							<strong>There is a good feeling amongst people about this city.</strong>
-						</div>
-						<div ng-show="negativeSentiMsg" class="alert alert-danger">
-							<strong>There is a bad feeling amongst people about this city.</strong>
-						</div>
-					</tr>
-				</tbody>
-			</table>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Sentiment Analysis</h3>
+					<table class="table">
+						<thead>
+							<tr>
+							  <th>Sentiment Score</th>          
+							  <th>Type</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ sentiment.score }}</td>
+								<td>{{ sentiment.type }}</td>
+							</tr>
+							<tr>
+								<div ng-show="positiveSentiMsg" class="alert alert-success">
+									<strong>There is a good feeling amongst people about this city.</strong>
+								</div>
+								<div ng-show="negativeSentiMsg" class="alert alert-danger">
+									<strong>There is a bad feeling amongst people about this city.</strong>
+								</div>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Emotions Analysis</h3>
+					<table class="table">
+						<thead>
+							<tr>
+							  <th>Emotions</th>          
+							  <th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="emotion in emotions">
+								<td>{{ emotion.emotion }}</td>
+								<td>{{ emotion.value }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

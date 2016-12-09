@@ -1,0 +1,34 @@
+<div ng-controller="resultsWeatherCtrl">
+	<a ui-sref="results">Back</a>
+
+	<div class="row" ng-repeat="weather in weathers">
+		<div class="col-md-3">
+			<div>
+				<h3>Date &amp; Time:</h3>
+				<p>{{ weather.dt_txt }}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div>
+				<h3>Main information:</h3>
+				<p>Pressure: {{ weather.main.pressure }}</p>
+				<p>Humidity: {{ weather.main.humidity }}</p>
+				<p>Max Temp: {{ weather.main.temp_max }}</p>
+				<p>Min Temp: {{ weather.main.temp_min }}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div>
+				<h3>Weather:</h3>
+				<p><img ng-src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"}}/>{{ weather.weather[0].description | titleCase }}</p>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div>
+				<h3>Wind:</h3>
+				<p>Degree: {{ weather.wind.deg }}</p>
+				<p>Speed: {{ weather.wind.speed }}</p>
+			</div>
+		</div>
+	</div>
+</div>
