@@ -7,6 +7,13 @@ app.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', function(
 
     refresh();
 
+    var interval = setInterval(function(){
+      if (document.readyState == 'complete') {
+        $window.scrollTo(0, -77);
+        clearInterval(interval);
+      }
+    }, 200);
+
     $scope.submitCityName = function() {
         if($scope.cityname) {
             $scope.errorMsg = false;
@@ -20,5 +27,6 @@ app.controller('homeCtrl', ['$scope', '$http', 'myService', '$window', function(
         }
         
     };
+    
 }]);﻿
 

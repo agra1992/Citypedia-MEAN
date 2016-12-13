@@ -12,6 +12,9 @@ module.exports = function(sequelize, DataTypes) {
 		tumblrData: {
 			type: DataTypes.TEXT
 		},
+		flickrData: {
+			type: DataTypes.TEXT
+		},
 		allTwitterData: {
 			type: DataTypes.TEXT
 		}

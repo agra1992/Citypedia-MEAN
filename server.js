@@ -37,12 +37,11 @@ var tumblr_oauth = {
 	token_secret: tumblr_config.tumblr.token_secret
 };
 //=========================================================================
-//INSTAGRAM
+//FLICKR
 //=========================================================================
-var ig = require('instagram-node').instagram();
-var insta_config = require('./config/insta.config');
-
-ig.use({ client_id: insta_config.insta.client_id, client_secret: insta_config.insta.client_secret });
+var Flickr = require("node-flickr");
+var keys = {"api_key": "1b158f32afa3ea9246f4791ca798f838"}
+var flickr = new Flickr(keys);
 
 //=========================================================================
 //YELP
@@ -67,7 +66,7 @@ app.use(bodyParser.urlencoded({
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-var PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 3000;
 
 // make express look in the public directory for assets (css/js/img)
 app.use(express.static(__dirname + '/'));
@@ -85,7 +84,7 @@ app.post('/city-info-twitter', function (req, res) {
 	if(req.body) {
 		var city = encodeURIComponent(req.body.cityname);
 
-		twitterClient.get('search/tweets', {q: city, count: 2, lang: "en"}, function(error, tweets, response) {
+		twitterClient.get('search/tweets', {q: city, lang: "en"}, function(error, tweets, response) {
 			if(error) {
 				res.status(500).send();
 			} else {
@@ -147,7 +146,7 @@ app.get('/city-info-twitter', function(req, res) {
 
 
 app.get('/city-info-openweather', function(req, res) {
-	console.log('In tumblr get');
+	console.log('In openweather get');
 
 	db.dbschema.findOne({
 		where: {
@@ -202,7 +201,7 @@ app.post('/city-info-tumblr', function (req, res) {
 	var arrTumblrData = [];
 	var client = tumblr.createClient(tumblr_oauth);
 
-	client.taggedPosts(req.body.cityname, {limit:2}, function (err, data) {
+	client.taggedPosts(req.body.cityname, {limit:15}, function (err, data) {
 		if(err) {
 			console.log(err);
 			res.status(500).send();
@@ -224,18 +223,44 @@ app.post('/city-info-tumblr', function (req, res) {
 	});
 });
 
-app.post('/city-info-instas', function (req, res) {
-	console.log('In insta');
-	console.log(req.body.cityname);
+app.get('/city-info-flickr', function(req, res) {
+	console.log('In flickr get');
 
-	ig.media_popular(function(err, medias, remaining, limit) {
-		if(err) {
-			console.log(err);
-		} else {
-			console.log(medias);
+	db.dbschema.findOne({
+		where: {
+			userId: req.query.userId + '_flickr'
 		}
+	}).then(function(data) {
+		if (!data) {
+			res.send({ data: null });
+			//res.json(data.toJSON());
+		} else {
+			res.json({ "userId": data.userId, "flickrData": data.flickrData});
+		}
+	}, function(e) {
+		res.status(404).send();
 	});
 });
+
+app.post('/city-info-flickr', function (req, res) {
+	console.log('In flickr post');
+
+	flickr.get("photos.search", { "tags": req.body.cityname, "per_page": 100 }, function(err, flickrRes){
+	    if (err) {
+	    	res.status(404).send();
+	    }
+	    else {
+	    	console.log(flickrRes.photos);
+	    	db.dbschema.create({userId: req.body.userId + '_flickr', flickrData: JSON.stringify(flickrRes.photos)}).then(function(data) {
+		 		res.json(data);
+		 	}, function(e) {
+		 		console.log(e);
+		 		res.status(400).json(e);
+		 	});
+	    }
+	});
+});
+
 
 app.get('/city-info-yelp', function(req, res) {
 	console.log('In yelp get');
@@ -259,7 +284,7 @@ app.get('/city-info-yelp', function(req, res) {
 app.post('/city-info-yelp', function (req, res) {
 	console.log('In yelp post');
 
-	yelp.search({ term: 'food', limit: 2, location: req.body.cityname })
+	yelp.search({ term: 'food', location: req.body.cityname })
 		.then(function (data) {
 		 	var arrYelpData = [];
 		 	data.businesses.forEach(function(item) {

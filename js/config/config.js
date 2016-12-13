@@ -22,28 +22,28 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/results.html'
         })
 
-        .state('weather', {
-            url: '/results/weather',
+        .state('results.weather', {
+            url: '/weather',
             templateUrl: 'views/weather.html'
         })
 
-        .state('tweets', {
-            url: '/results/tweets',
+        .state('results.tweets', {
+            url: '/tweets',
             templateUrl: 'views/tweets.html'
         })
 
-        .state('tumblr', {
-            url: '/results/tumblr',
+        .state('results.tumblr', {
+            url: '/tumblr',
             templateUrl: 'views/tumblr.html'
         })
 
-        .state('instas', {
-            url: '/results/instas',
-            templateUrl: 'views/instas.html'
+        .state('results.flickr', {
+            url: '/flickr',
+            templateUrl: 'views/flickr.html'
         })
 
-        .state('yelp', {
-            url: '/results/yelp',
+        .state('results.yelp', {
+            url: '/yelp',
             templateUrl: 'views/yelp.html'
         })
 });

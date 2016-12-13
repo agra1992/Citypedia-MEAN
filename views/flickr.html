@@ -1,0 +1,6 @@
+<div ng-controller="resultsFlickrCtrl" class="flickr_main">
+
+	<div ng-repeat="flickr in flickrs" class="flickr_div">
+		<img ng-src="https://farm{{flickr.farm}}.staticflickr.com/{{flickr.server}}/{{flickr.id}}_{{flickr.secret}}.jpg"?" class="flickr_img"/>
+	</div>
+</div>

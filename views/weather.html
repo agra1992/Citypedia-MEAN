@@ -1,14 +1,16 @@
-<div ng-controller="resultsWeatherCtrl">
-	<a ui-sref="results">Back</a>
+<div ng-controller="resultsWeatherCtrl" class="maxH">
 
-	<div class="row" ng-repeat="weather in weathers">
-		<div class="col-md-3">
-			<div>
-				<h3>Date &amp; Time:</h3>
-				<p>{{ weather.dt_txt }}</p>
-			</div>
-		</div>
-		<div class="col-md-3">
+	<div class="weather_row">
+	<div class="row weather_row_sub" ng-repeat="weather in weathers">
+	<uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel-default" is-open="status.open">
+      <uib-accordion-heading>
+        
+				<span>{{ weather.dt_txt }}</span>
+			<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      </uib-accordion-heading>
+      <div class="row">
+      <div class="col-md-4">
 			<div>
 				<h3>Main information:</h3>
 				<p>Pressure: {{ weather.main.pressure }}</p>
@@ -17,18 +19,25 @@
 				<p>Min Temp: {{ weather.main.temp_min }}</p>
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div>
 				<h3>Weather:</h3>
 				<p><img ng-src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"}}/>{{ weather.weather[0].description | titleCase }}</p>
 			</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-4">
 			<div>
 				<h3>Wind:</h3>
 				<p>Degree: {{ weather.wind.deg }}</p>
 				<p>Speed: {{ weather.wind.speed }}</p>
 			</div>
 		</div>
+      </div>
+    </div>
+  </uib-accordion>
+		
+		
 	</div>
+	</div>
+
 </div>

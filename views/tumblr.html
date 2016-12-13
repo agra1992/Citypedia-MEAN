@@ -1,15 +1,15 @@
 <div ng-controller="resultsTubmlrCtrl">
-	<a ui-sref="results">Back</a>
 
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2">
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="tumblr in tumblrs track by $index">
-					<p>{{tumblr.blogName}}</p>
-					<iframe src="{{tumblr.postUrl | trustAsResourceUrl }}"></iframe>
+		
+			<ul class="list-group tumblr_ul">
+				<li class="list-group-item tumblr_li" ng-repeat="tumblr in tumblrs track by $index">
+					<div>{{tumblr.blogName}}</div>
 					<a href={{tumblr.postUrl}} target="_blank">View blog on external link</a>
+					<div><iframe src="{{tumblr.postUrl | trustAsResourceUrl }}" class="tumblr_iframe"></iframe></div>
+					
 				</li>
 			</ul>
-		</div>
+		
 	</div>
 </div>

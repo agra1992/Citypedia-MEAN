@@ -1,4 +1,4 @@
-app.controller('resultsYelpCtrl', ['$scope', '$http', 'myService', function($scope, $http, myService) {
+app.controller('resultsYelpCtrl', ['$scope', '$http', 'myService', '$window', function($scope, $http, myService, $window) {
     console.log("hello from yelp");
     var yelpID = null;
     var cityName = myService.getCity();
@@ -7,6 +7,12 @@ app.controller('resultsYelpCtrl', ['$scope', '$http', 'myService', function($sco
         "userId": userId,
         "cityname": cityName
     }
+     var interval = setInterval(function(){
+      if (document.readyState == 'complete') {
+        $window.scrollTo(0, -77);
+        clearInterval(interval);
+      }
+    }, 200);
 
     $http.get('/city-info-yelp', {params: { "userId" : userId }}).then(function (yelpRes) {
         if(! yelpRes.data.yelpData) {

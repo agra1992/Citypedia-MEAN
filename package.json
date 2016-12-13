@@ -20,6 +20,7 @@
     "express": "~4.9.7",
     "fb": "^1.1.1",
     "instagram-node": "^0.5.8",
+    "node-flickr": "^1.0.0",
     "npm-openweathermap": "0.0.1",
     "oauth": "0.9.10",
     "openweather-node": "0.0.4",

@@ -1,0 +1,235 @@
+html,body{
+	font-family: Lato, "Helvetica Neue", Arial;
+	height:100%;
+}
+.head{
+	background: url("../img/bg_large.png");
+	width: 100%;
+    height: 200px;
+    text-align: center;
+    line-height: 2;
+    font-size: 7em;
+    color: #fafafa;
+    text-shadow: 0 -1px 1px #222;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: "Poiret One", "Helvetica Neue", Arial;
+    font-weight: 200;
+}
+.marginTop{
+	margin-top:30px;
+}
+.top_bar{
+	    text-align: center;
+    background: #fafafa;
+    box-shadow: 0 -1px 6px rgba(34, 25, 25, .6);
+    padding: 15px 0 5px;
+    z-index: 99;
+    overflow: visible;
+    height: auto;
+    min-height: 45px;
+    line-height: normal;
+    position:fixed;
+    width:100%;
+    top:0;
+   
+}
+.top_bar ul{
+	 width:100%;
+}
+.top_bar li{
+	float:none !important;
+	display:inline-block;
+	    font-weight: 300;
+    font-size: 17px;
+    margin: 0px 10px;
+    color:#000000 !important;
+}
+
+.top_bar li.active a{
+	background-color: #904B4B !important;
+	color:#ffffff !important; 
+	border-bottom: 5px solid #904B4B;
+}
+.top_bar li.active a:before{
+	background: #904B4B;
+    border: 5px solid #fafafa;
+    border-bottom-color: #e8e8e8;
+    content: " ";
+    display: block;
+    height: 40px;
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+    z-index: -1;
+    top: 29px;
+    width: 40px;
+    box-shadow: 7px 7px 6px rgba(34, 25, 25, .33);
+    color: #fafafa;
+    cursor: pointer;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.top_bar li:nth-child(2).active a{
+    background-color: #D18353 !important;
+    border-bottom: 5px solid #D18353;
+}
+.top_bar li:nth-child(2).active a:before{
+    background: #D18353 !important;
+}
+.top_bar li:nth-child(3).active a{
+    background-color: #7BC2AB !important;
+    border-bottom: 5px solid #7BC2AB;
+}
+.top_bar li:nth-child(3).active a:before{
+    background: #7BC2AB !important;
+}
+.top_bar li:nth-child(4).active a{
+    background-color: #3C5981 !important;
+    border-bottom: 5px solid #3C5981;
+}
+.top_bar li:nth-child(4).active a:before{
+    background: #3C5981 !important;
+}
+.top_bar li:nth-child(5).active a{
+    background-color: #0B696F !important;
+    border-bottom: 5px solid #0B696F;
+}
+.top_bar li:nth-child(5).active a:before{
+    background: #0B696F !important;
+}
+.yelp_main{
+	background:url("../img/yelp_bg.jpg");
+	padding:30px;
+	width:100%;
+	height:100%;
+	min-height:500px;
+    background-size:cover;
+}
+.yelp_row{
+	background-color:#ffffff;
+	    height: 420px;
+	    overflow:auto;
+        opacity:0.8;
+}
+.yelp_img{
+	height:70px;
+}
+.maxH{
+	height:100%;
+    margin-top:77px;
+}
+.home_button{
+	float: left;
+	    /* width: 50px; */
+	    /* height: 50px; */
+	    display: inline-block;
+	    /* margin-left: 9px; */
+	    /* margin-top: 10px; */
+	    position: absolute;
+	    left: 10px;
+	    bottom: 18px;
+
+}
+.home_icon{
+	height:32px;
+	cursor:pointer;
+    font-size:30px;
+    color:#777;
+}
+.home_icon a{
+    text-decoration: none !important;
+}
+.tumblr_li{
+	border: none !important;
+	float: left;
+	/* width: 330px; */
+	/* height: 3000px; */
+	margin: 0px 10px;
+	min-width: 330px;
+	width: 30%;
+}
+.tumblr_iframe{
+	height:400px;
+	width:350px;
+}
+.tumblr_ul{
+	width: 1060px;
+    align-items: center;
+    /* text-align: center; */
+    /* display: flex; */
+    /* width: 100%; */
+    margin: auto;
+}
+/*.weather_main{
+    background:url("../img/weather_bg.jpg") ;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+   
+    position:absolute;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}*/
+.weather_row{
+	    padding: 30px;
+    
+}
+.weather_row_sub{
+	    background-color: #ffffff;
+	    margin:auto;
+    /*border-top:2px solid;*/
+    
+    width:800px;
+    /*opacity:0.8;*/
+    /*-moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;*/
+      /*box-shadow: inset -1px 3px 31px 2px #464040;*/
+}
+.maxHo{
+    height:100%;
+}
+.tweet_main{
+    background:url("../img/tweet_bg.jpg");
+    padding:30px;
+    width:100%;
+    height:100%;
+    min-height:500px;
+    background-size:cover;
+}
+.tweet_div{
+    height:500px;
+    overflow:auto;
+    background-color:#ffffff;
+}
+.tweet_emo_div{
+    background-color:#ffffff;
+    float:right;
+    width:400px;
+}
+.Cright{
+    float:right;
+}
+.Ctop{
+    margin-top:10px;
+}
+.tweet_padding{
+    padding:0px 25px;
+}
+.flickr_div{
+   display: inline-block;
+   margin: 30px;
+}
+.flickr_img{
+     /*   height: 200px;*/
+    width: 300px;
+}
+.flickr_main{
+        width: 95%;
+    margin: auto;
+}

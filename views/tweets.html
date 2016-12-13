@@ -1,7 +1,8 @@
-<div ng-controller="resultsTweetsCtrl">
-	<a ui-sref="results">Back</a>
-	<div class="row">
-		<div class="col-md-8">
+
+<div ng-controller="resultsTweetsCtrl" class="maxH">
+<div class="tweet_main maxH">
+	<div class="row tweet_padding">
+		<div class="col-md-7 tweet_div">
 			<table class="table">
 				<thead>
 					<tr>
@@ -17,8 +18,8 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="col-md-4">
-			<div class="row">
+		<div class="col-md-4 Cright">
+			<div class="row tweet_emo_div">
 				<div class="col-md-12">
 					<h3>Sentiment Analysis</h3>
 					<table class="table">
@@ -45,8 +46,8 @@
 					</table>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
+			<div class="row tweet_emo_div Ctop">
+				<!-- <div class="col-md-12">
 					<h3>Emotions Analysis</h3>
 					<table class="table">
 						<thead>
@@ -62,8 +63,12 @@
 							</tr>
 						</tbody>
 					</table>
+				</div> -->
+				<div class="col-md-12">
+					<div id="containerChart" style="width: 330px; height: 300px; margin: 0 auto"></div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </div>

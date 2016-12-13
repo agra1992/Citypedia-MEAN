@@ -1,24 +1,30 @@
 <!-- partial-home.html -->
 <div ng-controller="homeCtrl">
-	<div class="jumbotron text-center">
-	    <h1>Citypedia</h1>
-	    <p>Please enter the <span class="text-danger">city</span> you want to search for below.</p> 
-	    <div class="form-group move-down row">
-	    	<div class="col-md-12">
-	    		<input type="text" class="form-control" ng-autocomplete="result1" ng-model="cityname" placeholder="E.g., San Francisco, New York, London...">
-	    	</div>
-	    </div>
-
-	    <div class="form-group row">
-	    	<div class="col-md-12">
-	    		<submit class="btn btn-success btn-lg btn-block" ng-click="submitCityName()">Search For City Info
-	    	</div>
-	    </div>
-	    <div class="alert alert-danger" ng-show="errorMsg">
-			<strong>Please enter a city name</strong>.
+<!--HEADER-->
+    <div class="head">
+    <div>Citypedia</div>
+    </div>
+    <form ng-submit="submitCityName()">
+		<div class="jumbotron text-center marginTop">
+		    <h4>Please enter the <span class="text-danger">city</span> you want to search for below.</h4> 
+		    <div class="form-group move-down row">
+		    	<div class="col-md-12">
+		    		<input type="text" class="form-control" ng-autocomplete="result1" ng-model="cityname" placeholder="E.g., San Francisco, New York, London..." autofocus>
+		    	</div>
+		    </div>
+		    
+			    <div class="form-group row">
+			    	<div class="col-md-12">
+			    		<button type="submit" class="btn btn-success btn-lg btn-block">Tell me about this City</button>
+			    	</div>
+			    </div>
+		    </form>
 		</div>
-		<div class="alert alert-success" ng-show="successMsg">
-			<strong>Searching...</strong>.
-		</div>
+	</form>
+	<div class="alert alert-danger" ng-show="errorMsg">
+		<strong>Please enter a city name</strong>.
+	</div>
+	<div class="alert alert-success" ng-show="successMsg">
+		<strong>Searching...</strong>.
 	</div>
 </div>
