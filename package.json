@@ -25,6 +25,8 @@
     "oauth": "0.9.10",
     "openweather-node": "0.0.4",
     "openweathermap": "^1.0.0",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.1",
     "request": "2.30.0",
     "sequelize": "^3.27.0",
     "sqlite3": "^3.1.8",
