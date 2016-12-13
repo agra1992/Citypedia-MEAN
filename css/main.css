@@ -109,9 +109,8 @@ html,body{
 }
 .yelp_row{
 	background-color:#ffffff;
-	    height: 420px;
-	    overflow:auto;
-        opacity:0.8;
+    height: 90%;
+    overflow: auto;
 }
 .yelp_img{
 	height:70px;
@@ -155,12 +154,16 @@ html,body{
 	width:350px;
 }
 .tumblr_ul{
-	width: 1060px;
+	width: 90%;
     align-items: center;
     /* text-align: center; */
     /* display: flex; */
     /* width: 100%; */
     margin: auto;
+}
+.tumblr_div{
+    width:350px;
+    margin:auto;
 }
 /*.weather_main{
     background:url("../img/weather_bg.jpg") ;
@@ -203,14 +206,14 @@ html,body{
     background-size:cover;
 }
 .tweet_div{
-    height:500px;
+    height:90%;
     overflow:auto;
     background-color:#ffffff;
 }
 .tweet_emo_div{
     background-color:#ffffff;
     float:right;
-    width:400px;
+    width:100%;
 }
 .Cright{
     float:right;

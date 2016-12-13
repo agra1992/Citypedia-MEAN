@@ -15,7 +15,7 @@
 					<tr ng-repeat="yelp in yelps track by $index">
 						<td>
 							<img src={{yelp.yelpImageUrl}} class="yelp_img"/>
-							{{ yelp.yelpName }}
+							<strong>{{ yelp.yelpName }}</strong>
 						</td>
 						<td>
 							<img ng-src="{{yelp.yelpRatingImgUrl}}" />

@@ -4,10 +4,11 @@
 		
 			<ul class="list-group tumblr_ul">
 				<li class="list-group-item tumblr_li" ng-repeat="tumblr in tumblrs track by $index">
+				<div class="tumblr_div">
 					<div>{{tumblr.blogName}}</div>
 					<a href={{tumblr.postUrl}} target="_blank">View blog on external link</a>
 					<div><iframe src="{{tumblr.postUrl | trustAsResourceUrl }}" class="tumblr_iframe"></iframe></div>
-					
+				</div>
 				</li>
 			</ul>
 		
