@@ -4,10 +4,11 @@ html,body{
 }
 .head{
 	background: url("../img/bg_large.png");
+    background-size: cover;
 	width: 100%;
-    height: 200px;
+    height: 350px;
     text-align: center;
-    line-height: 2;
+    line-height: 1.8;
     font-size: 7em;
     color: #fafafa;
     text-shadow: 0 -1px 1px #222;
@@ -15,6 +16,9 @@ html,body{
     margin-bottom: 0;
     font-family: "Poiret One", "Helvetica Neue", Arial;
     font-weight: 200;
+}
+.head-text {
+    font-size: 2em;
 }
 .marginTop{
 	margin-top:30px;
