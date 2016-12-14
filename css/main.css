@@ -183,14 +183,17 @@ html,body{
     background-attachment: fixed;
 }*/
 .weather_row{
-	    padding: 30px;
+    padding: 30px;
+    background:url("../img/weather_bg2.jpg") ;
+    background-size: cover;
+    background-attachment: fixed;
     
 }
 .weather_row_sub{
-	    background-color: #ffffff;
-	    margin:auto;
+    background-color: #ffffff;
+    margin:auto;
+    margin-bottom: 10px;
     /*border-top:2px solid;*/
-    
     width:800px;
     /*opacity:0.8;*/
     /*-moz-box-shadow:    3px 3px 5px 6px #ccc;
@@ -198,6 +201,10 @@ html,body{
   box-shadow:         3px 3px 5px 6px #ccc;*/
       /*box-shadow: inset -1px 3px 31px 2px #464040;*/
 }
+.weather_row .panel-group{
+    margin-bottom:0px !important;
+}
+
 .maxHo{
     height:100%;
 }
@@ -210,7 +217,7 @@ html,body{
     background-size:cover;
 }
 .tweet_div{
-    height:90%;
+    height:800px;
     overflow:auto;
     background-color:#ffffff;
 }

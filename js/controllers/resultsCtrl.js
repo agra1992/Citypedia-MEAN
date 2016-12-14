@@ -1,6 +1,6 @@
 app.controller('resultsCtrl', ['$state', '$scope', '$window', function($state, $scope, $window) {
     
-    $state.transitionTo('results.weather');
+    $state.transitionTo('results.tweets');
 
      var interval = setInterval(function(){
       if (document.readyState == 'complete') {
