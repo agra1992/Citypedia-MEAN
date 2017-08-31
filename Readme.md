@@ -283,6 +283,7 @@ Query Parameters: pageNumber
 Example query parameter:
 
 `&pageNumber=0`
+
 Reponse Object:
 
 __Note: We get a String response__
