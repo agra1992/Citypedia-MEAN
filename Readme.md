@@ -205,7 +205,7 @@ Reponse Object:
 {"response":{"message":"","success":true}}
 ```
 
-###Case 2: Clock Out
+### Case 2: Clock Out
 Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=doClockPunch`
 
 Request Method: `POST`
