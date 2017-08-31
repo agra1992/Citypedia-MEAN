@@ -88,9 +88,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getShifts`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Gets the Shift details for a user.
 
@@ -112,9 +111,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getRouteList&siteid=134&
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Gets the routes for a user based on the site the user is assigned to.
 
@@ -144,9 +142,8 @@ Request Method: `Multipart`
 
 Content-Type: `multipart/mixed` (need to confirm)
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Add a new incident as posted by the user
 
@@ -183,9 +180,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=doClockPunch`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Clocks in the user for the site for a route
 
@@ -210,9 +206,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=doClockPunch`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Clocks out the user for the site for a route
 
@@ -237,9 +232,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getCheckpointList`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Get information about all the beacons for a site
 
@@ -272,9 +266,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getincidents&pageNumber=
 
 Request Method: `GET`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Get all the incidents posted by the user
 
@@ -306,9 +299,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getCheckpointAccessInfo`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Get the checkpoints that have been hit for a route
 
@@ -344,9 +336,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=checkpointReader`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Update the beacons that have been hit by the user
 
@@ -371,9 +362,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=getEmergencyContacts`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Get the emergency contacts for the current site
 
@@ -405,9 +395,8 @@ Endpoint: `https://wms.redi-trak.com/api/api.cfc?method=updateofficerlocation`
 
 Request Method: `POST`
 
-Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99`
-
-// Format for authorization header is userid@accessToken
+Request Header: `Authorization: egen@072B2066-D4AE-52AA-D07417EC03A53B99
+// Format for authorization header is userid@accessToken`
 
 Function: Post the location of the user
 
