@@ -172,7 +172,9 @@ Reponse Object:
 
 __Note: We get a String response__
 
+```
 "{"response":{"message":"success","status":200}}"
+```
 
 Clock In and Clock Out Endpoint
 ============
